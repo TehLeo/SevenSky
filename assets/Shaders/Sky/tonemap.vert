@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform mat4 g_ProjectionMatrixInverse;
 uniform mat4 g_ViewMatrixInverse;
 

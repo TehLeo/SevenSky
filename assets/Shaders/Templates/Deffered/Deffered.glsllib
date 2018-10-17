@@ -1,5 +1,4 @@
 
-
 //uniform usampler2D m_BufferMap;
 uvec4 pack(vec4 col, vec3 norm, float depth) {
 	//10 bit color RGB, 2 bits free to be used

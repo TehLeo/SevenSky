@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 #ifdef DEFFERED2
 #import "Shaders/Templates/Deffered/Deffered.glsllib"
 //layout(location = 0)

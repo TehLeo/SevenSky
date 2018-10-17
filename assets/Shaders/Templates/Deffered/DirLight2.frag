@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform usampler2D m_BufferMap; 
 
 uniform sampler2D m_ReflectionMap;

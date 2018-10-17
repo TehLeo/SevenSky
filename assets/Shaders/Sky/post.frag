@@ -1,4 +1,4 @@
-#import "Common/ShaderLib/GLSLCompat.glsllib"
+#import "Shaders/Templates/Common/Compat.glsllib"
 
 uniform vec2 g_FrustumNearFar;
 

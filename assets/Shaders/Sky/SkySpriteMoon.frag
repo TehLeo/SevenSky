@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform sampler2D m_ColorMap;
 //Sun Dir relative to Moon Dir
 uniform vec3 m_SunMoonDir;

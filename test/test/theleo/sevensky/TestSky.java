@@ -44,8 +44,10 @@ import com.jme3.system.AppSettings;
 import com.jme3.ui.Picture;
 import theleo.sevensky.core.SevenSky;
 import theleo.sevensky.core.SkyVars;
+import theleo.sevensky.core.Space;
 import theleo.sevensky.elements.Clouds;
 import theleo.sevensky.elements.Sky;
+import theleo.sevensky.skyso.nuta.NutationFunction;
 
 
 public class TestSky extends SimpleApplication {

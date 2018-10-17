@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform mat4 g_ViewProjectionMatrix;
 uniform vec3 g_CameraPosition;
 

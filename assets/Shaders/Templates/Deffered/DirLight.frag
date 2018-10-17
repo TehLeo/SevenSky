@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform sampler2D m_ColorMap; 
 uniform sampler2D m_NormalMap; 
 uniform sampler2D m_PositionMap; 

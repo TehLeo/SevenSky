@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 #ifdef COLOR_MAP
 uniform sampler2D m_ColorMap;
 #endif

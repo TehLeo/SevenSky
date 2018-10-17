@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform mat4 g_ViewProjectionMatrix;
 uniform mat4 g_ViewProjectionMatrixInverse;
 uniform sampler2D m_RandomMap;

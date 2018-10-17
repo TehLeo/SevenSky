@@ -1,3 +1,4 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
 
 uniform vec3 m_Range;
 

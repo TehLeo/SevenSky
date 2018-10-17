@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform sampler2D m_ColorMap; 
 noperspective in float density;
 noperspective in vec2 extra;

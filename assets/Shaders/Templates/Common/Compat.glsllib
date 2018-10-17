@@ -1,0 +1,21 @@
+#if __VERSION__ >= 130
+#  define texture1D texture
+#  define texture2D texture
+#  define texture3D texture
+#  define textureCube texture
+#  define texture2DLod textureLod
+#  define textureCubeLod textureLod
+#  if defined VERTEX_SHADER
+#    define varying out
+#    define attribute in
+#  elif defined FRAGMENT_SHADER
+out vec4 outFragColor;
+#    define varying in
+#    define gl_FragColor outFragColor
+#  endif
+#else
+#define in varying
+#define out varying
+#define noperspective
+#define smooth
+#endif

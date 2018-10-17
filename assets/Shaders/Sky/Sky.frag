@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 varying vec3 oF_ex;
 varying vec3 oL_in;
 void main() {

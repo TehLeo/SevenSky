@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 #define PI 3.1415926535897932384626433832795
 
 uniform sampler2D m_ColorMap; 

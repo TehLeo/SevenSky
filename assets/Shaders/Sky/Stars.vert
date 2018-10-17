@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 attribute vec3 inPosition;
 attribute float inSize;
 

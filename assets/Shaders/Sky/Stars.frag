@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 void main() {
 	//float p = 1.0-2.0*length(gl_PointCoord-0.5);
 	float p = 1.0;

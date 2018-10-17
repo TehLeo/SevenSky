@@ -1,3 +1,5 @@
+#import "Shaders/Templates/Common/Compat.glsllib"
+
 uniform vec3 g_CameraPosition;
 
 uniform sampler2D m_WeatherMap;
