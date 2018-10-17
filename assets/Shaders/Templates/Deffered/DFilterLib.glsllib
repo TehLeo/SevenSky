@@ -1,0 +1,42 @@
+#ifdef COLORMAP
+uniform sampler2D m_ColorMap; 
+#endif
+#ifdef NORMALMAP
+uniform sampler2D m_NormalMap; 
+vec4 glNorm(vec2 uv) {
+	vec4 n = texture(m_NormalMap, uv);
+	n.xyz = n.xyz*2.0-1.0;
+	return n;
+}
+vec4 glNorm() {
+	vec4 n = texture(m_NormalMap, texCoord);
+	n.xyz = n.xyz*2.0-1.0;
+	return n;
+}
+#endif
+#ifdef POSITIONMAP
+uniform sampler2D m_PositionMap; 
+vec3 glPos() {return texture(m_PositionMap, texCoord); }
+vec3 glPos(vec2 uv) {return texture(m_PositionMap, uv); }
+vec3 glPos(float depth, vec2 uv) {return texture(m_PositionMap, uv);}
+#else
+	#ifdef NORMALMAP
+vec3 glPos() {
+	float depth = texture(m_NormalMap, texCoord).w;
+	vec4 pos = vec4(texCoord, depth, 1.0) * 2.0 - 1.0;
+	pos = g_ViewProjectionMatrixInverse * pos;
+	return pos.xyz / pos.w;
+}
+vec3 glPos(vec2 uv) {
+	float depth = texture(m_NormalMap, uv).w;
+	vec4 pos = vec4(uv, depth, 1.0) * 2.0 - 1.0;
+	pos = g_ViewProjectionMatrixInverse * pos;
+	return pos.xyz / pos.w;
+}
+vec3 glPos(float depth, vec2 uv) {
+	vec4 pos = vec4(uv, depth, 1.0) * 2.0 - 1.0;
+	pos = g_ViewProjectionMatrixInverse * pos;
+	return pos.xyz / pos.w;
+}
+	#endif
+#endif

@@ -1,0 +1,40 @@
+MaterialDef SkySpriteMoon {
+    MaterialParameters {
+		Texture2D ColorMap
+		Vector3 SunMoonDir
+		Vector3 MoonDir
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySpriteMoon.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySpriteMoon.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+		Defines {
+			DEFFERED
+		}
+    }
+	Technique Deffered2 {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySpriteMoon.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+		Defines {
+			DEFFERED2
+		}
+    }	
+}

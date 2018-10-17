@@ -1,0 +1,28 @@
+MaterialDef Default {
+    MaterialParameters {
+		Texture2D ColorMap
+    }
+    Technique {
+        VertexShader GLSL130: Shaders/Templates/Common/simpleWFNT.vert
+        FragmentShader GLSL130: MatDefs/Templates/Tex3d/default.frag
+        WorldParameters {
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+    }
+	Technique Deffered2 {
+        VertexShader GLSL130: Shaders/Templates/Common/simpleWFNT.vert
+        FragmentShader GLSL330: MatDefs/Templates/Tex3d/default.frag
+        WorldParameters {
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			DEFFERED2
+		}
+    }
+}

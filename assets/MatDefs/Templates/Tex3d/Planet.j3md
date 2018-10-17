@@ -1,0 +1,53 @@
+MaterialDef Planet {
+    MaterialParameters {
+		Texture2D NoiseMap
+		Texture2D TestMap
+    }
+    Technique {
+        VertexShader GLSL130: Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: MatDefs/Templates/Tex3d/planet.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			VERT_NO_Norm
+		}
+    }
+	Technique Deffered {
+        VertexShader GLSL130: Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: MatDefs/Templates/Tex3d/planet.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			DEFFERED
+			VERT_NO_Norm
+		}
+    }
+	Technique Deffered2 {
+        VertexShader GLSL130: Shaders/Sky/tonemap.vert
+        FragmentShader GLSL330: MatDefs/Templates/Tex3d/planet.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			DEFFERED2
+			VERT_NO_Norm
+		}
+    }
+}

@@ -1,0 +1,19 @@
+MaterialDef CloudSprite {
+    MaterialParameters {
+		Texture2D CloudTex
+		Texture2D PhaseMap
+		Vector3 SizeInv
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/CloudSpriteFinal.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudSpriteFinal.frag
+        WorldParameters {
+			CameraLeft
+			CameraUp
+			WorldMatrix
+			WorldViewProjectionMatrix
+			ViewProjectionMatrix
+			CameraPosition
+        }
+    }
+}

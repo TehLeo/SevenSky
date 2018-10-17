@@ -1,0 +1,15 @@
+MaterialDef Sky {
+    MaterialParameters {
+		Vector3 sundir
+		Float Ghg
+		Vector3 scatterRay
+		Vector3 scatterMie
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/Sky.vert
+        FragmentShader GLSL130: Shaders/Sky/Sky.frag
+        WorldParameters {
+			WorldViewProjectionMatrix
+        }
+    }
+}

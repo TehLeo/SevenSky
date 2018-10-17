@@ -1,0 +1,15 @@
+MaterialDef Test1 {
+    MaterialParameters {
+		
+    }
+	Technique {
+        VertexShader GLSL130:   MatDefs/Test1.vert
+        FragmentShader GLSL130: MatDefs/Test1.frag
+        WorldParameters {
+			ViewMatrix
+			ViewMatrixInverse
+			WorldMatrix
+			WorldViewProjectionMatrix
+		}
+    }
+}

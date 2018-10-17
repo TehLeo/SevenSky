@@ -1,0 +1,21 @@
+MaterialDef Smooth {
+    MaterialParameters {
+        Texture2D ColorMap
+		Vector3 Range
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: Shaders/Sky/tonemap.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			CameraPosition
+			FrustumNearFar
+			ProjectionMatrix
+			ViewProjectionMatrixInverse
+        }
+		Defines {
+			
+		}
+    }
+}

@@ -1,0 +1,71 @@
+MaterialDef DirLight2 {
+    MaterialParameters {
+        Texture2D BufferMap
+		Texture2D ReflectionMap
+		Int DirLightsSize
+		Vector3Array DirLights
+		Float ToneMapScale
+		Float ToneMapFrom
+		Float ToneMapTo
+		Texture2D CloudShadowMap
+		Texture2D TransmittanceLut
+		Vector3 SunLight
+		Vector3 SunDir
+		Float Coverage
+		Vector2 CloudOffset
+		Float PLANET_RAD
+		Float PLANET_ATMOS_RAD
+		Vector3 AmbientLight (AmbientLight)
+
+
+
+
+
+
+		Int FilterMode
+        Boolean HardwareShadows
+
+        Texture2D ShadowMap0 (ShadowMap0)
+        Texture2D ShadowMap1
+        Texture2D ShadowMap2
+        Texture2D ShadowMap3
+
+        Float ShadowIntensity
+        Vector4 Splits
+        Vector2 FadeInfo
+
+        Matrix4 LightViewProjectionMatrix0
+        Matrix4 LightViewProjectionMatrix1
+        Matrix4 LightViewProjectionMatrix2
+        Matrix4 LightViewProjectionMatrix3  
+
+        Float PCFEdge
+        Float ShadowMapSize
+
+        Matrix4 ViewProjectionMatrixInverse
+        Vector4 ViewProjectionMatrixRow2
+        
+        Boolean BackfaceShadows: true
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Light.vert
+        FragmentShader GLSL330: Shaders/Templates/Deffered/DirLight2.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			Resolution
+			CameraPosition
+        }
+		Defines {
+			AmbientLight : AmbientLight
+
+            HARDWARE_SHADOWS : HardwareShadows
+            FILTER_MODE : FilterMode
+            PCFEDGE : PCFEdge
+            SHADOWMAP_SIZE : ShadowMapSize
+            FADE : FadeInfo
+            PSSM : Splits
+            BACKFACE_SHADOWS : BackfaceShadows
+		}
+    }
+}

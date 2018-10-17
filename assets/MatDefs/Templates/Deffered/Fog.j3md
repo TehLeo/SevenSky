@@ -1,0 +1,15 @@
+MaterialDef Fog {
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D NormalMap
+		Texture2D NoiseMap
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Fog.vert
+        FragmentShader GLSL130: Shaders/Templates/Deffered/Fog.frag
+        WorldParameters {
+			ViewProjectionMatrixInverse
+			Time
+        }
+    }
+}

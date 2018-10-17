@@ -1,0 +1,12 @@
+MaterialDef MilkyWay {
+    MaterialParameters {
+		Texture2D ColorMap
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/milkyway.vert
+        FragmentShader GLSL130: Shaders/Sky/milkyway.frag
+        WorldParameters {
+			ViewMatrix
+        }
+    }
+}

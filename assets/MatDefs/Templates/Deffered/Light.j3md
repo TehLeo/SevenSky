@@ -1,0 +1,28 @@
+MaterialDef DefferedLight {
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D NormalMap
+
+		Texture2D ShadowMap (ShadowMap)
+		Int PointLightsSize
+		Vector4Array PointLights
+
+		Vector3 AmbientLight (AmbientLight)
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Light.vert
+        FragmentShader GLSL130: Shaders/Templates/Deffered/Light.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			CameraPosition
+			FrustumNearFar
+			ProjectionMatrix
+			ViewProjectionMatrixInverse
+        }
+		Defines {
+			ShadowMap : ShadowMap
+			AmbientLight : AmbientLight
+		}
+    }
+}

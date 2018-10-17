@@ -1,0 +1,22 @@
+MaterialDef Smooth {
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D NormalMap
+		Texture2D PositionMap
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Smooth.vert
+        FragmentShader GLSL130: Shaders/Templates/Deffered/Smooth.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			CameraPosition
+			FrustumNearFar
+			ProjectionMatrix
+			ViewProjectionMatrixInverse
+        }
+		Defines {
+			
+		}
+    }
+}

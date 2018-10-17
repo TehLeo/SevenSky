@@ -1,0 +1,33 @@
+MaterialDef SkyPost {
+    MaterialParameters {
+		Texture2D ColorMap
+		Vector3 SunDir
+		Vector3 MoonDir
+		Vector3 SunCol
+		Vector3 MoonCol
+		Boolean UseViewLut
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkyPost.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyPost.frag
+        WorldParameters {
+			ViewMatrix
+			ViewMatrixInverse
+        }
+		Defines {           
+            VIEW : UseViewLut
+		}
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/SkyPost.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyPost.frag
+        WorldParameters {
+			ViewMatrix
+			ViewMatrixInverse
+        }
+		Defines {
+			DEFFERED
+			VIEW : UseViewLut
+		}
+    }
+}

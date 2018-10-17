@@ -1,0 +1,15 @@
+MaterialDef WeatherMap {
+    MaterialParameters {
+        Texture2D ColorMap
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/weathermap.vert
+        FragmentShader GLSL130: Shaders/Sky/weathermap.frag
+        WorldParameters {
+
+        }
+		Defines {
+			
+		}
+    }
+}

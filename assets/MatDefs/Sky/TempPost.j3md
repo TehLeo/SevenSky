@@ -1,0 +1,14 @@
+MaterialDef TempPost {
+    MaterialParameters {
+		Texture2D ColorMap
+		Float Alpha
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: Shaders/Sky/TempPost.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+        }
+    }
+}

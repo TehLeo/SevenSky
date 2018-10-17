@@ -1,0 +1,63 @@
+MaterialDef Cloud {
+    MaterialParameters {
+		Texture2D WeatherMap
+		Texture2D LayerCloudMap
+		Texture2D PhaseMap
+		Texture3D PerlinMap
+		Texture3D DetailMap
+		Texture2D TransmittanceLut
+		Texture2D CloudPathLut
+		Vector3 SunIrradiance
+		Vector3 SunDir (SunDir)
+		Vector3 MoonPos (MoonPos)
+		Vector3 AmbientColor
+		Vector2 CloudOffset
+		Float PLANET_RAD
+		Float PLANET_ATMOS_RAD
+		Float ScatteringFactor
+		Float CloudScale
+		Float DetailScale
+		Float SunScale
+		Float AmbientScale
+		Float LightScale
+		Float DensityEdge
+		Float Coverage
+		Float RainDensity
+		Float AltoCoverage
+		Float AltoLightScale
+		Boolean UseCloudDetail (UseCloudDetail)
+		Boolean UseMultDetail (UseMultDetail)
+		
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/CloudPost.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudPost.frag
+        WorldParameters {
+			CameraPosition
+			ViewMatrix
+			ViewMatrixInverse
+        }
+		Defines {
+			LIGHT_SUN : SunDir
+			LIGHT_MOON : MoonPos
+			USE_CLOUD_DETAIL : UseCloudDetail
+			USE_MULT_DETAIL : UseMultDetail
+		}
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/CloudPost.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudPost.frag
+        WorldParameters {
+			CameraPosition
+			ViewMatrix
+			ViewMatrixInverse
+        }
+		Defines {
+			DEFFERED
+			LIGHT_SUN : SunDir
+			LIGHT_MOON : MoonPos
+			USE_CLOUD_DETAIL : UseCloudDetail
+			USE_MULT_DETAIL : UseMultDetail
+		}
+    }
+}

@@ -1,0 +1,41 @@
+MaterialDef SkyApply {
+    MaterialParameters {
+		Texture2D ColorMap
+		Texture2D MilkyWay (MilkyWay)
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: Shaders/Sky/skyapply.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+        }
+		Defines {
+			MILKY_WAY : MilkyWay
+		}
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/tonemap.vert
+        FragmentShader GLSL130: Shaders/Sky/skyapply.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+        }
+		Defines {
+			DEFFERED
+			MILKY_WAY : MilkyWay
+		}
+    }
+	Technique Deffered2 {
+        VertexShader GLSL330:   Shaders/Sky/tonemap.vert
+        FragmentShader GLSL330: Shaders/Sky/skyapply.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+        }
+		Defines {
+			DEFFERED2
+			MILKY_WAY : MilkyWay
+		}
+    }
+}

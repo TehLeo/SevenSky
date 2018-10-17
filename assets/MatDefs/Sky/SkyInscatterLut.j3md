@@ -1,0 +1,45 @@
+MaterialDef SkyInscatterLut {
+    MaterialParameters {
+		Float RAYLEIGH_SCALE_HEIGHT
+		Float MIE_SCALE_HEIGHT
+		Float PLANET_RAD
+		Float PLANET_ATMOS_RAD
+		
+		Float Altitude
+		Vector3 SunDir
+		Float SUN_MIE_G
+		Float SUN_INTENSITY
+
+		Vector3 MoonPos
+		Float MOON_MIE_G
+		Float MOON_INTENSITY
+
+		Vector3 SCATTER_RAY
+		Vector3 SCATTER_MIE
+		Texture2D TransmittanceLut
+		Texture2D PathLengthLut
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkyInscatterLut.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyInscatterLut.frag
+        WorldParameters {
+			
+        }
+		Defines {
+			SUN : SunDir
+			MOON : MoonPos
+		}
+    }
+	Technique View {
+        VertexShader GLSL130:   Shaders/Sky/SkyInscatterLut.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyInscatterLut.frag
+        WorldParameters {
+			ViewMatrix
+        }
+		Defines {
+			VIEW
+			SUN : SunDir
+			MOON : MoonPos
+		}
+    }
+}

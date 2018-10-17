@@ -1,0 +1,22 @@
+MaterialDef SSAO {
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D NormalMap
+		Texture2D DepthMap
+		Texture2D PositionMap
+		Texture2D RandomMap
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Light.vert
+        FragmentShader GLSL130: Shaders/Templates/Deffered/SSAO.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			CameraPosition
+			FrustumNearFar
+			ProjectionMatrix
+			ViewProjectionMatrix
+			ViewProjectionMatrixInverse
+        }
+    }
+}

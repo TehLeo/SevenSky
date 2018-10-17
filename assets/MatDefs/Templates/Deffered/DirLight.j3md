@@ -1,0 +1,30 @@
+MaterialDef DefferedLight {
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D NormalMap
+		Texture2D PositionMap
+		Texture2D ReflectionMap
+		Int DirLightsSize
+		Vector3Array DirLights
+
+		Texture2D CloudShadowMap
+		Texture2D TransmittanceLut
+		Vector3 SunDir
+		Float Coverage
+		Vector3 AmbientLight (AmbientLight)
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Templates/Deffered/Light.vert
+        FragmentShader GLSL130: Shaders/Templates/Deffered/DirLight.frag
+        WorldParameters {
+			ProjectionMatrixInverse
+			ViewMatrixInverse
+			Resolution
+			CameraPosition
+        }
+		Defines {
+			ShadowMap : ShadowMap
+			AmbientLight : AmbientLight
+		}
+    }
+}

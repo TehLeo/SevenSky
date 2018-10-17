@@ -1,0 +1,12 @@
+MaterialDef Sky {
+    MaterialParameters {
+
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/Stars.vert
+        FragmentShader GLSL130: Shaders/Sky/Stars.frag
+        WorldParameters {
+			WorldViewProjectionMatrix
+        }
+    }
+}

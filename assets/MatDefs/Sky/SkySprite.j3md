@@ -1,0 +1,47 @@
+MaterialDef Sky {
+    MaterialParameters {
+		Color Color (Color)
+		Texture2D ColorMap (ColorMap)
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySprite.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+		Defines {
+			COLOR : Color
+			COLOR_MAP : ColorMap
+		}
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySprite.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+		Defines {
+			DEFFERED
+			COLOR : Color
+			COLOR_MAP : ColorMap
+		}
+    }
+	Technique Deffered2 {
+        VertexShader GLSL130:   Shaders/Sky/SkySprite.vert
+        FragmentShader GLSL130: Shaders/Sky/SkySprite.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			ProjectionMatrix
+			WorldViewProjectionMatrix
+        }
+		Defines {
+			DEFFERED2
+			COLOR : Color
+			COLOR_MAP : ColorMap
+		}
+    }
+}

@@ -1,0 +1,23 @@
+MaterialDef CloudSprite {
+    MaterialParameters {
+		Vector3 LookAt
+		Vector3 SunDir
+		Vector3 SunIrradiance
+		Vector3 SkyIrradiance
+		Texture2D PhaseMap
+		Color Color (Color)
+		Texture2D ColorMap (ColorMap)
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/CloudSprite.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudSprite.frag
+        WorldParameters {
+			ViewProjectionMatrix
+			CameraPosition
+        }
+		Defines {
+			COLOR : Color
+			COLOR_MAP : ColorMap
+		}
+    }
+}

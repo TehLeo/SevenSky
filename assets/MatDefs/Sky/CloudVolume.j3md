@@ -1,0 +1,33 @@
+MaterialDef Cloud {
+    MaterialParameters {
+		Texture2D PhaseMap
+		Texture3D VolumeMap
+		Texture3D PerlinMap
+		Vector3 SunIrradiance
+		Vector3 SkyIrradiance
+		Vector3 SunDir
+		Vector3 AmbientColor
+		Vector2 CloudOffset
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkyPost.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudVolume.frag
+        WorldParameters {
+			CameraPosition
+			ViewMatrix
+			ViewMatrixInverse
+        }
+    }
+	Technique Deffered {
+        VertexShader GLSL130:   Shaders/Sky/SkyPost.vert
+        FragmentShader GLSL130: Shaders/Sky/CloudVolume.frag
+        WorldParameters {
+			CameraPosition
+			ViewMatrix
+			ViewMatrixInverse
+        }
+		Defines {
+			DEFFERED
+		}
+    }
+}

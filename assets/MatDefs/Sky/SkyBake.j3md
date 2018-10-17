@@ -1,0 +1,21 @@
+MaterialDef SkyBake {
+    MaterialParameters {
+		Vector3 SunDir
+		Vector3 MoonPos
+		Vector3 SunIrradiance
+    }
+	Technique {
+        VertexShader GLSL130:   Shaders/Sky/SkyBake.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyBake.frag
+        WorldParameters {
+			
+        }
+    }
+	Technique HD {
+		VertexShader GLSL130:   Shaders/Sky/SkyBake.vert
+        FragmentShader GLSL130: Shaders/Sky/SkyBakeHD.frag
+        WorldParameters {
+			
+        }
+	}
+}

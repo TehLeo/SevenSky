@@ -1,0 +1,42 @@
+MaterialDef BrickWall {
+    MaterialParameters {
+		Texture2D NoiseMap
+		Texture2D TestMap
+    }
+    Technique {
+        VertexShader GLSL130: Shaders/Templates/Common/simpleWFN.vert
+        FragmentShader GLSL130: MatDefs/Templates/Tex3d/brickwall.frag
+        WorldParameters {
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+    }
+	Technique Deffered {
+        VertexShader GLSL130: Shaders/Templates/Common/simpleWFN.vert
+        FragmentShader GLSL130: MatDefs/Templates/Tex3d/brickwall.frag
+        WorldParameters {
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			DEFFERED
+		}
+    }
+	Technique Deffered2 {
+        VertexShader GLSL130: Shaders/Templates/Common/simpleWFN.vert
+        FragmentShader GLSL330: MatDefs/Templates/Tex3d/brickwall.frag
+        WorldParameters {
+            WorldViewProjectionMatrix
+			WorldMatrix
+			CameraPosition
+			CameraDirection
+        }
+		Defines {
+			DEFFERED2
+		}
+    }
+}
