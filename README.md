@@ -14,7 +14,7 @@ The library is located in src folder, licences under BSD 3-Clause.
 Additional libraries which can be optionally used are located in:
 * src-hyg HYG Star catalogue (https://github.com/astronexus/HYG-Database)
 
-* src-nuta Nutation Function (SOFA Software License), use if you are interested in the accurate calculation of celestial bodies basded on time and location of observer.
+* src-nuta Nutation Function (SOFA Software License), use if you are interested in the accurate calculation of celestial bodies based on time and location of observer.
   To use the nutation function use
   ```
   Space.NutationFunction = new NutationFunction();
