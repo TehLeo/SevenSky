@@ -26,6 +26,7 @@
  */
 package theleo.sevensky.core;
 
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import java.util.HashMap;
 import theleo.sevensky.elements.Clouds;
@@ -55,11 +56,23 @@ public class SkyVars {
 			}
 			return false;
 		}
+
+		@Override
+		public String toString() {
+			return key + ", " + type;
+		}
+		
 	}
 	private HashMap<Key, Object> map = new HashMap<Key, Object>();
 	
 	public boolean has(Key key) { return map.containsKey(key); }
-	public Object put(Key key, Object val) { if(val == null) return map.remove(key); else { if(key.type.isInstance(val)) return map.put(key, val); else throw new IllegalArgumentException("Key " + key.key + ": Value " + val + " is not of type " + key.type); } }
+	public Object put(Key key, Object val) { 
+		if(val == null) return map.remove(key); 
+		else { 
+			if(key.type.isInstance(val)) return map.put(key, val); 
+			else throw new IllegalArgumentException("Key " + key.key + ": Value " + val + " is not of type " + key.type); 
+		} 
+	}
 	public Object remove(Key key) { return map.remove(key); } 
 	public <T> T get(Key key) { return (T)map.get(key); }
 	public Vector3f getVec3(Key key) { return (Vector3f)map.get(key); }
@@ -101,6 +114,9 @@ public class SkyVars {
 		c.put(Clouds.RainDensity, 0f);
 		c.put(Clouds.AltoCoverage, 0f);
 		c.put(Clouds.AltoLightScale, 0.2f);
+		
+		c.put(Clouds.CloudOffset, new Vector2f());
+		c.put(Clouds.CloudScale, 1f);
 		
 		return c;
 	}

@@ -84,14 +84,15 @@ public class Sky implements SkyElement {
 	
 	ByteBuffer skyLightBuf;
 	public Vector3f[] lights = new Vector3f[6]; //x+, x-, z+, z-, y+, y-
+	
+	public int skySize = 128;
+	public int lutSize = 512;
+	public int skyLightSize = 16;
 
 	@Override
 	public void init(SevenSky p) {
 		this.p = p;
-		
-		int skySize = 128;
-		int lutSize = 512;
-		
+				
 		for (int i = 0; i < lights.length; i++) {
 			lights[i] = new Vector3f();
 		}
@@ -109,10 +110,6 @@ public class Sky implements SkyElement {
 		gen.enableDebug();
 		skypost = createSkyQuad(p.am, p.cam);
 		
-		
-		
-		int skyLightSize = 16;
-
 		skyLightGen = new SkyLutGpuGenerator(vars, vars.get(TRANSMITTANCE_LUT), vars.get(PATH_LENGTH_LUT), p.am, p.rm,
 				p.cam, SkyLutType.LUT_2D, skyLightSize, skyLightSize, Image.Format.RGBA16F);
 		skyLightGen.enableDebug();
@@ -134,10 +131,10 @@ public class Sky implements SkyElement {
 			if (moonPos != null) {
 				moonDir = moonPos.subtract(p.cam.getLocation()).normalizeLocal();
 			}
-			gen.render(p.rm, p.sunDir, moonDir, Math.max(p.cam.getLocation().y, 0));
+			gen.render(p.rm, p.c.getVec3(Sky.SunDir), moonDir, Math.max(p.cam.getLocation().y, 0));
 		}
 		
-		skyLightGen.render(p.rm, p.sunDir, p.moonDir, Math.max(p.cam.getLocation().y, 0), false);
+		skyLightGen.render(p.rm, p.c.getVec3(Sky.SunDir), p.moonDir, Math.max(p.cam.getLocation().y, 0), false);
 //		long time = System.currentTimeMillis();
 //		skyLightGen.render(rm, sunDir, moonDir, Math.max(cam.getLocation().y, 0), false);
 

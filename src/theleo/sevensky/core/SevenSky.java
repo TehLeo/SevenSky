@@ -187,10 +187,10 @@ public class SevenSky implements SceneProcessor {
 			mat.setTexture("TransmittanceLut", T);
 			
 			mat.setTexture("CloudShadowMap", vars.get(Clouds.WEATHER_MAP));
-			mat.setFloat("Coverage", 1);
+			mat.setFloat("Coverage", vars.get(Clouds.Coverage));
 			mat.setFloat("PLANET_RAD", vars.getF(Sky.PLANET_RADIUS));
-			mat.setFloat("PLANET_ATMOS_RAD", vars.getF(Sky.ATMOSPHERE_RADIUS));
-			mat.setVector2("CloudOffset", new Vector2f());
+			mat.setFloat("PLANET_ATMOS_RAD", vars.getF(Sky.ATMOSPHERE_RADIUS));				
+			mat.setVector2("CloudOffset", vars.get(Clouds.CloudOffset));
 		}
 		@Override
 		protected boolean isRequiresDepthTexture() {
@@ -201,6 +201,11 @@ public class SevenSky implements SceneProcessor {
 			return mat;
 		}
 
+		@Override
+		protected void preFrame(float tpf) {
+			mat.setVector2("CloudOffset", vars.get(Clouds.CloudOffset));
+		}
+		
 	}
 	
 
@@ -220,7 +225,7 @@ public class SevenSky implements SceneProcessor {
 	public Vector3d SunSpectralPercentage = new Vector3d(1, 1, 1);
 	public double SunIrradianceEarth;
 
-	public Vector3f sunDir = new Vector3f(1, 1, 0).normalizeLocal();
+//	public Vector3f sunDir = new Vector3f(1, 1, 0).normalizeLocal();
 	public Vector3f moonDir = new Vector3f(0, 1, 0);
 
 	public Vector3f SunIrradianceEarth3 = new Vector3f(1, 1, 1);
@@ -238,7 +243,7 @@ public class SevenSky implements SceneProcessor {
 		this.c = c;
 
 		this.cam = cam;
-		
+		lastLightDir = c.getVec3(Sky.SunDir);
 
 		int viewW = cam.getWidth();
 		int viewH = cam.getHeight();
@@ -261,7 +266,7 @@ public class SevenSky implements SceneProcessor {
 		fsQuad = createFullScreenQuad();
 		mat = new Material(am, "MatDefs/Sky/SkyBake.j3md");
 		mat.selectTechnique("HD", rm);
-		mat.setVector3("SunDir", sunDir);
+		mat.setVector3("SunDir", c.getVec3(Sky.SunDir));
 		mat.setVector3("MoonPos", moonDir.mult((float) (MoonEarthDist * 1000f)));
 
 		double[] BANDS = new double[]{
@@ -338,7 +343,8 @@ public class SevenSky implements SceneProcessor {
 	}
 
 	public void setSunDir(Vector3f sunDir) {
-		this.sunDir.set(sunDir);
+		Vector3f s = c.getVec3(Sky.SunDir);
+		s.set(sunDir);
 		mat.setVector3("SunDir", sunDir);
 	}
 
@@ -398,7 +404,7 @@ public class SevenSky implements SceneProcessor {
 	QueryAvg mipMap;
 
 	Geometry planet;
-	public Vector3f lastLightDir = sunDir;
+	public Vector3f lastLightDir;
 
 
 	public void applySky(RenderManager rm) {
@@ -501,7 +507,7 @@ public class SevenSky implements SceneProcessor {
 
 //		Vector4f a = projInv.mult(new Vector4f(aspect, 1, 1, 1));
 		Vector4f a = projInv.mult(new Vector4f(1, 1, 1, 1));
-		System.out.println("FSQUAD (" + aspect + ", " + a + ")");
+//		System.out.println("FSQUAD (" + aspect + ", " + a + ")");
 		m.setBuffer(VertexBuffer.Type.TexCoord, 2,
 				new float[]{-a.x, -a.y,
 					a.x, -a.y,

@@ -1003,6 +1003,19 @@ public class Space {
 		double sec = (min-floor(min))*60;
 		System.out.println(msg + ": \t" + angle + "\t" + ((int)deg) + ":" + ((int)min) + ":" + (sec));
 	}
+	public static Vector3d getSunPos(double JD, double obsLon, double obsLat) {
+		double t = Space.JD2000Millenium(JD);
+		double lon = EarthPosition.getLon(t);
+		double lat = EarthPosition.getLat(t);
+		double rad =  EarthPosition.getRad(t);
+		lon = range2PI(lon + PI);
+		lat = rangePIPI(lat);
+		double GAST = GMST(JD) + equationOfEquinoxes(JD);
+		double[] azAlt = observer(JD, GAST,
+				lon, lat,
+				obsLon, obsLat);
+		return sphericalToCartesianY(azAlt[0], azAlt[1], rad);
+	}
 	public static Vector3d getEarthPos(double JD, double obsLon, double obsLat) {
 		double t = Space.JD2000Millenium(JD);
 		double lon = EarthPosition.getLon(t);

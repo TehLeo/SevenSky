@@ -28,11 +28,17 @@ package test.theleo.sevensky;
  */
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.AnalogListener;
+import com.jme3.input.controls.InputListener;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.Trigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.RenderManager;
@@ -42,12 +48,15 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
 import com.jme3.ui.Picture;
+import templates.geom.Vector3d;
 import theleo.sevensky.core.SevenSky;
 import theleo.sevensky.core.SkyVars;
 import theleo.sevensky.core.Space;
+import static theleo.sevensky.core.Space.*;
 import theleo.sevensky.elements.Clouds;
 import theleo.sevensky.elements.Sky;
 import theleo.sevensky.skyso.nuta.NutationFunction;
+import theleo.sevensky.vsop87.Earth;
 
 
 public class TestSky extends SimpleApplication {
@@ -124,11 +133,55 @@ public class TestSky extends SimpleApplication {
 		fpp.addFilter(new SevenSky.LightFilter(vars));
 		getViewPort().addProcessor(fpp);
 		
+		Vector2f cloudOffset = vars.get(Clouds.CloudOffset);
 		
+		key(KeyInput.KEY_1, new AnalogListener() {
+			@Override
+			public void onAnalog(String name, float value, float tpf) {
+				cloudOffset.x += tpf;
+			}
+		});
 		
+		key(KeyInput.KEY_2, new AnalogListener() {
+			@Override
+			public void onAnalog(String name, float value, float tpf) {
+				cloudOffset.x -= tpf;
+			}
+		});
+		
+		//initialize functions that calculate position of Earth based on time, and nutation
+		Space.EarthPosition = new Earth();
+		Space.NutationFunction = new NutationFunction();
+		
+		//Julian data + julian time
+		dateJD = JDN(18, 10, 2018) + JDTT(12, 00, 0);
 
+		//LATITUDE IS NORTH-SOUTH, LONGITUDE is EAST-WEST
+		//double obsLat = 52.3555, obsLon = -1.1743; //ENGLAND   (longitude is negative, since its WEST)
+		double obsLat = 35.89857007, obsLon = 14.47291966; //MALTA
+		
+		
+		key(KeyInput.KEY_3, new AnalogListener() {
+			@Override
+			public void onAnalog(String name, float value, float tpf) {
+				dateJD += tpf*0.1f;
+				Vector3f SunDir = Space.getSunPos(dateJD, obsLon, obsLat).toVector3f().normalize();
+				skySeven.setSunDir(SunDir);
+			}
+		});	
+		key(KeyInput.KEY_4, new AnalogListener() {
+			@Override
+			public void onAnalog(String name, float value, float tpf) {
+				dateJD -= tpf*0.1f;
+				Vector3f SunDir = Space.getSunPos(dateJD, obsLon, obsLat).toVector3f().normalize();
+				skySeven.setSunDir(SunDir);
+			}
+		});	
+		
+		
+		
     }
-	
+	double dateJD;
 	boolean init = false;
 
     @Override
@@ -158,7 +211,7 @@ public class TestSky extends SimpleApplication {
 		for(Vector3f v : sky.lights)
 			amb.addLocal(v);
 //		amb.mult(0.05f/sky.lights.length);
-		amb.normalizeLocal();
+		//amb.normalizeLocal();
 				
 		ambient.setColor(new ColorRGBA(amb.x, amb.y, amb.z, 1f));
     }
@@ -166,5 +219,22 @@ public class TestSky extends SimpleApplication {
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
+    }
+	
+	
+	private static int actionc = 0;
+    
+    public void trigger(Trigger t, InputListener a) {
+        trigger(t, a, "trigger_"+(++actionc));
+    }
+    public void trigger(Trigger t, InputListener a, String name) {
+        inputManager.addMapping(name, t);
+        inputManager.addListener(a, name);
+    }
+    public void key(int keyInput, InputListener a) {
+        key(keyInput, a, "trigger_"+(++actionc));
+    }
+    public void key(int keyInput, InputListener a, String name) {
+        trigger(new KeyTrigger(keyInput), a, name);
     }
 }

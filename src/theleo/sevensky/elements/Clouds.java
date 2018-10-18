@@ -29,6 +29,7 @@ package theleo.sevensky.elements;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
@@ -83,8 +84,9 @@ public class Clouds implements SkyElement {
 	public static Key SunIrradiance = new Key("SunIrradiance", Vector3f.class);	//opt	
 	public static Key AmbientColor = new Key("AmbientColor", Vector3f.class);
 
-	public static Key CloudOffset = new Key("CloudOffset", Vector3f.class);
-
+	public static Key CloudOffset = new Key("CloudOffset", Vector2f.class);
+	
+	public static Key CloudScale = new Key("CloudScale", Float.class);
 	public static Key Scattering = new Key("Scattering", Float.class);
 	public static Key DetailScale = new Key("DetailScale", Float.class);
 	public static Key SunScale = new Key("SunScale", Float.class);
@@ -170,10 +172,26 @@ public class Clouds implements SkyElement {
 	@Override
 	public void renderView() {
 		if(query != null) query.beginTimeElapsed();
+		
+		SkyVars vars = p.c;
+		
+		Material mat = cloudpost.getMaterial();
+				
+		mat.setVector2("CloudOffset", vars.get(CloudOffset));
+		mat.setFloat("ScatteringFactor", vars.getF(Scattering));
+		mat.setFloat("CloudScale", vars.getF(CloudScale));
+		mat.setFloat("DetailScale", vars.getF(DetailScale));
+		mat.setFloat("SunScale", vars.getF(DetailScale));
+		mat.setFloat("AmbientScale", vars.getF(AmbientScale));
+		mat.setFloat("LightScale", vars.getF(LightScale));
+		mat.setFloat("DensityEdge", vars.getF(DensityEdge));
+		mat.setFloat("RainDensity", vars.getF(RainDensity));
 
-		cloudpost.getMaterial().setVector3("SunDir", p.lastLightDir);
+		mat.setFloat("AltoCoverage", vars.getF(AltoCoverage));
+		mat.setFloat("AltoLightScale", vars.getF(AltoLightScale));
 
-		cloudpost.getMaterial().render(cloudpost, p.rm);
+		mat.setVector3("SunDir", p.lastLightDir);
+		mat.render(cloudpost, p.rm);
 
 		if(query != null) query.end();
 	}
