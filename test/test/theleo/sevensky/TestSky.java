@@ -55,6 +55,9 @@ import theleo.sevensky.core.Space;
 import static theleo.sevensky.core.Space.*;
 import theleo.sevensky.elements.Clouds;
 import theleo.sevensky.elements.Sky;
+import theleo.sevensky.generators.WeatherMapGenerator;
+import theleo.sevensky.generators.WeatherMapGenerator.WeatherMapData;
+import theleo.sevensky.generators.extra.Vector2DLut;
 import theleo.sevensky.skyso.nuta.NutationFunction;
 import theleo.sevensky.vsop87.Earth;
 
@@ -107,6 +110,17 @@ public class TestSky extends SimpleApplication {
 		}
 		
 		SkyVars vars = SkyVars.Earth();
+		
+		//by default a test weather map is created, check out the content of Clouds.createTestWeatherMap
+		//to generate a custom weather map
+		//So the next two lines are optional
+		WeatherMapData weatherMapData = Clouds.createTestWeatherMap(getAssetManager(), getRenderManager());
+		vars.put(Clouds.WeatherMap, weatherMapData);
+		
+		//or add simple texture as a weather map, eg. artist painted
+		//vars.put(Clouds.SimpleWeatherMap, /*texture 2D */);
+		
+		//clouds animation is achieved by modifing the WeatherMap/SimpleWeatherMap
 		
 		skySeven = new SevenSky(vars, getCamera(), getRenderManager(), getAssetManager());
 		
@@ -178,8 +192,23 @@ public class TestSky extends SimpleApplication {
 			}
 		});	
 		
-		
-		
+		//weather map update
+		key(KeyInput.KEY_5, new AnalogListener() {
+			@Override
+			public void onAnalog(String name, float value, float tpf) {
+				//eg. simply rotate the clouds in the weather map for demonstration
+				WeatherMapGenerator.rotate(weatherMapData.clouds, 0.1f * tpf);
+				
+				//alternatively you can animate the cloud geometry as you like
+				
+				//alternatively provide eg: vector field (image with direction vectors), check Vector2DLut(img) 
+//				WeatherMapGenerator.update(weatherMapData.clouds, vectorLut, 0.0001f);
+				
+				WeatherMapGenerator.update(weatherMapData.cloudGeom, weatherMapData.clouds);
+				WeatherMapGenerator.renderMap(weatherMapData.tr, weatherMapData.cloudGeom, getRenderManager());
+			}
+		});
+				
     }
 	double dateJD;
 	boolean init = false;
