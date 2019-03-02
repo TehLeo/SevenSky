@@ -4,9 +4,9 @@ MaterialDef CloudSprite {
 		Vector3 SunDir
 		Vector3 SunIrradiance
 		Vector3 SkyIrradiance
-		Texture2D PhaseMap
+		Texture2D PhaseMap -LINEAR
 		Color Color (Color)
-		Texture2D ColorMap (ColorMap)
+		Texture2D ColorMap (ColorMap) -LINEAR
     }
 	Technique {
         VertexShader GLSL130:   Shaders/Sky/CloudSprite.vert

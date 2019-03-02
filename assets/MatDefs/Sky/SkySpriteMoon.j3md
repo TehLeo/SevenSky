@@ -1,6 +1,6 @@
 MaterialDef SkySpriteMoon {
     MaterialParameters {
-		Texture2D ColorMap
+		Texture2D ColorMap -LINEAR
 		Vector3 SunMoonDir
 		Vector3 MoonDir
     }

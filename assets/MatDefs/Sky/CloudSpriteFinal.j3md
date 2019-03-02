@@ -1,7 +1,7 @@
 MaterialDef CloudSprite {
     MaterialParameters {
-		Texture2D CloudTex
-		Texture2D PhaseMap
+		Texture2D CloudTex -LINEAR
+		Texture2D PhaseMap -LINEAR
 		Vector3 SizeInv
     }
 	Technique {

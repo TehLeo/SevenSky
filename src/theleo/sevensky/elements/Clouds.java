@@ -104,7 +104,7 @@ public class Clouds implements SkyElement {
 	public static Key CurlNoise = new Key("CurlNoise", Texture2D.class);
 	public static Key DetailMap = new Key("DetailNoise", Texture3D.class);
 	
-	public static float rainDensity = 0f;
+//	public static float rainDensity = 0f;
 	
 	QueryAvg query;
 	

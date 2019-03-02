@@ -16,8 +16,8 @@ MaterialDef SkyInscatterLut {
 
 		Vector3 SCATTER_RAY
 		Vector3 SCATTER_MIE
-		Texture2D TransmittanceLut
-		Texture2D PathLengthLut
+		Texture2D TransmittanceLut -LINEAR
+		Texture2D PathLengthLut -LINEAR
     }
 	Technique {
         VertexShader GLSL130:   Shaders/Sky/SkyInscatterLut.vert

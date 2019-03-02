@@ -1,6 +1,6 @@
 MaterialDef TempPost {
     MaterialParameters {
-		Texture2D ColorMap
+		Texture2D ColorMap -LINEAR
 		Float Alpha
     }
 	Technique {

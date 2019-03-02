@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import templates.geom.Vector3d;
 import templates.misc.QueryAvg;
 import templates.util.MiscUtils;
+import theleo.sevensky.core.SkyVars.Key;
 import static theleo.sevensky.core.Space.blackbodyIrradiance;
 import static theleo.sevensky.core.Space.blackbodyIrradianceIntegral;
 import theleo.sevensky.elements.Clouds;
@@ -164,6 +165,10 @@ public class SevenSky implements SceneProcessor {
 	}
 	
 	public static class LightFilter extends Filter {
+		public static Key TONE_MAP_SCALE = new Key("TONE_MAP_SCALE", Float.class);
+		public static Key TONE_MAP_FROM = new Key("TONE_MAP_FROM", Float.class);
+		public static Key TONE_MAP_TO = new Key("TONE_MAP_TO", Float.class);
+		
 	    public Material mat;
 		public SkyVars vars;
 
@@ -175,9 +180,9 @@ public class SevenSky implements SceneProcessor {
 		@Override
 		protected void initFilter(AssetManager am, RenderManager renderManager, ViewPort vp, int w, int h) {
 			mat = new Material(am, "MatDefs/Sky/Post.j3md");
-			mat.setFloat("ToneMapScale", 4f);
-			mat.setFloat("ToneMapFrom", 0f);
-			mat.setFloat("ToneMapTo", 1f);
+			mat.setFloat("ToneMapScale", vars.getF(TONE_MAP_SCALE));
+			mat.setFloat("ToneMapFrom", vars.getF(TONE_MAP_FROM));
+			mat.setFloat("ToneMapTo", vars.getF(TONE_MAP_TO));
 			mat.setVector3("SunLight", vars.getVec3(Sky.SunLight));
 			mat.setVector3("SunDir", vars.getVec3(Sky.SunDir));
 			Texture2D T = vars.get(Sky.TRANSMITTANCE_LUT);
@@ -406,7 +411,7 @@ public class SevenSky implements SceneProcessor {
 	Geometry planet;
 	public Vector3f lastLightDir;
 
-
+	
 	public void applySky(RenderManager rm) {
 		if(applyQ != null) applyQ.beginTimeElapsed();
 

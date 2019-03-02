@@ -1,12 +1,12 @@
 MaterialDef Cloud {
     MaterialParameters {
-		Texture2D WeatherMap
-		Texture2D LayerCloudMap
-		Texture2D PhaseMap
-		Texture3D PerlinMap
-		Texture3D DetailMap
-		Texture2D TransmittanceLut
-		Texture2D CloudPathLut
+		Texture2D WeatherMap -LINEAR
+		Texture2D LayerCloudMap -LINEAR
+		Texture2D PhaseMap -LINEAR
+		Texture3D PerlinMap -LINEAR
+		Texture3D DetailMap -LINEAR
+		Texture2D TransmittanceLut -LINEAR
+		Texture2D CloudPathLut -LINEAR
 		Vector3 SunIrradiance
 		Vector3 SunDir (SunDir)
 		Vector3 MoonPos (MoonPos)

@@ -122,7 +122,13 @@ public class WeatherMapGenerator {
 	}
 	
 	
-	
+	/**
+	 * Renders the weather map.
+	 * 
+	 * @param tr
+	 * @param cloudGeom
+	 * @param rm 
+	 */
 	public static void renderMap(TextureRenderer tr, Geometry cloudGeom, RenderManager rm) {
 		tr.enableRender(rm);
 		Renderer r = rm.getRenderer();
@@ -168,6 +174,11 @@ public class WeatherMapGenerator {
 			for(int k = 0; k < c.extra.length; k++) c.extra[k].set(bottom, top);
 		}
 	}
+	/**
+	 * Updates the cloud geometry based on the cloud data
+	 * @param g - cloud geometry
+	 * @param cld - array of clouds
+	 */
 	public static void update(Geometry g, Cloud[] cld) {
 		Mesh m = g.getMesh();
 		MeshBuilder.update(m, cld);
@@ -389,7 +400,6 @@ public class WeatherMapGenerator {
 		
 		return new Cloud(vertex, index, outer);
 	}
-	
 	public static class Cloud implements BMesh {
 		public Vector3f[] vertex;
 		public Vector2f[] extra;

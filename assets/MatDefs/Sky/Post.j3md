@@ -2,10 +2,10 @@ MaterialDef Post {
     MaterialParameters {
 		Int NumSamples
         Int NumSamplesDepth
-		Texture2D Texture
-        Texture2D DepthTexture
-		Texture2D TransmittanceLut
-		Texture2D CloudShadowMap
+		Texture2D Texture -LINEAR
+        Texture2D DepthTexture -LINEAR
+		Texture2D TransmittanceLut -LINEAR
+		Texture2D CloudShadowMap -LINEAR
 
 		Vector3 SunDir
 		Vector3 SunLight
@@ -23,10 +23,10 @@ MaterialDef Post {
 		Int FilterMode
         Boolean HardwareShadows
 
-        Texture2D ShadowMap0 (ShadowMap0)
-        Texture2D ShadowMap1
-        Texture2D ShadowMap2
-        Texture2D ShadowMap3
+        Texture2D ShadowMap0 (ShadowMap0) -LINEAR 
+        Texture2D ShadowMap1 -LINEAR
+        Texture2D ShadowMap2 -LINEAR
+        Texture2D ShadowMap3 -LINEAR
 
         Float ShadowIntensity
         Vector4 Splits

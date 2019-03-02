@@ -28,6 +28,7 @@ package test.theleo.sevensky;
  */
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.AssetManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.InputListener;
@@ -41,7 +42,9 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.FogFilter;
 import com.jme3.renderer.RenderManager;
+import com.jme3.renderer.ViewPort;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
@@ -59,6 +62,7 @@ import theleo.sevensky.generators.WeatherMapGenerator;
 import theleo.sevensky.generators.WeatherMapGenerator.WeatherMapData;
 import theleo.sevensky.generators.extra.Vector2DLut;
 import theleo.sevensky.skyso.nuta.NutationFunction;
+import theleo.sevensky.stars.hyg.Stars;
 import theleo.sevensky.vsop87.Earth;
 
 
@@ -122,14 +126,22 @@ public class TestSky extends SimpleApplication {
 		
 		//clouds animation is achieved by modifing the WeatherMap/SimpleWeatherMap
 		
+		//Remove high altitude clouds
+		//vars.put(Clouds.AltoCoverage, 1f);
+		//Add rainbow
+		//vars.put(Clouds.RainDensity, 70000f);
+		
 		skySeven = new SevenSky(vars, getCamera(), getRenderManager(), getAssetManager());
+		
+		Stars stars = new Stars();
+		skySeven.add(stars);
+		
 		
 		sky = new Sky();
 		skySeven.add(sky);
 
 		clouds = new Clouds();
 		skySeven.add(clouds);
-		
 		
 		getViewPort().addProcessor(skySeven);
 
@@ -168,11 +180,16 @@ public class TestSky extends SimpleApplication {
 		Space.NutationFunction = new NutationFunction();
 		
 		//Julian data + julian time
-		dateJD = JDN(18, 10, 2018) + JDTT(12, 00, 0);
+		dateJD = JDN(18, 10, 2018) + JDTT(5, 30, 0);
 
 		//LATITUDE IS NORTH-SOUTH, LONGITUDE is EAST-WEST
 		//double obsLat = 52.3555, obsLon = -1.1743; //ENGLAND   (longitude is negative, since its WEST)
 		double obsLat = 35.89857007, obsLon = 14.47291966; //MALTA
+		
+		{
+			Vector3f SunDir = Space.getSunPos(dateJD, obsLon, obsLat).toVector3f().normalize();
+			skySeven.setSunDir(SunDir);
+		}
 		
 		
 		key(KeyInput.KEY_3, new AnalogListener() {

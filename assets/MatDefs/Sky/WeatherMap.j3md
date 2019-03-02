@@ -1,6 +1,6 @@
 MaterialDef WeatherMap {
     MaterialParameters {
-        Texture2D ColorMap
+        Texture2D ColorMap -LINEAR
     }
 	Technique {
         VertexShader GLSL130:   Shaders/Sky/weathermap.vert

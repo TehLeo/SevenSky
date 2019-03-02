@@ -1,7 +1,7 @@
 MaterialDef SkyApply {
     MaterialParameters {
-		Texture2D ColorMap
-		Texture2D MilkyWay (MilkyWay)
+		Texture2D ColorMap -LINEAR
+		Texture2D MilkyWay (MilkyWay) -LINEAR 
     }
 	Technique {
         VertexShader GLSL130:   Shaders/Sky/tonemap.vert

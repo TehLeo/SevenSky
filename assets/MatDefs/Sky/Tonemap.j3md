@@ -1,6 +1,6 @@
 MaterialDef Smooth {
     MaterialParameters {
-        Texture2D ColorMap
+        Texture2D ColorMap -LINEAR
 		Vector3 Range
     }
 	Technique {

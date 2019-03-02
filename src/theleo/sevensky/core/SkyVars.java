@@ -84,6 +84,10 @@ public class SkyVars {
 	
 	public static SkyVars Earth() {
 		SkyVars c = new SkyVars();
+		c.put(SevenSky.LightFilter.TONE_MAP_SCALE, 4f);
+		c.put(SevenSky.LightFilter.TONE_MAP_FROM, 0f);
+		c.put(SevenSky.LightFilter.TONE_MAP_TO, 1f);
+		
 		c.put(Sky.PLANET_RADIUS, 6360e3f);
 		c.put(Sky.ATMOSPHERE_RADIUS, 6420e3f);
 		c.put(Sky.RAYLEIGH_SCALE_HEIGHT, 7994f);

@@ -1,6 +1,6 @@
 MaterialDef SkyPost {
     MaterialParameters {
-		Texture2D ColorMap
+		Texture2D ColorMap -LINEAR
 		Vector3 SunDir
 		Vector3 MoonDir
 		Vector3 SunCol

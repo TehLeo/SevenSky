@@ -1,7 +1,7 @@
 MaterialDef Sky {
     MaterialParameters {
 		Color Color (Color)
-		Texture2D ColorMap (ColorMap)
+		Texture2D ColorMap (ColorMap) -LINEAR
     }
 	Technique {
         VertexShader GLSL130:   Shaders/Sky/SkySprite.vert

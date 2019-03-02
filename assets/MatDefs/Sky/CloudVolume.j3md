@@ -1,8 +1,8 @@
 MaterialDef Cloud {
     MaterialParameters {
-		Texture2D PhaseMap
-		Texture3D VolumeMap
-		Texture3D PerlinMap
+		Texture2D PhaseMap -LINEAR
+		Texture3D VolumeMap -LINEAR
+		Texture3D PerlinMap -LINEAR
 		Vector3 SunIrradiance
 		Vector3 SkyIrradiance
 		Vector3 SunDir
